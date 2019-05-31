@@ -1,0 +1,102 @@
+package com.example.messageapp;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
+public class Message {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    @NotNull
+    @Size(min = 3)
+    private String title;
+
+    @NotNull
+    @Size(min = 1, max = 250)
+    private String content;
+
+    @NotNull
+    @Size(min = 5)
+    private String postedDate;
+
+    @NotNull
+    @Size(min = 2)
+    private String postedBy;
+
+    private String image;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getPostedDate() {
+        return postedDate;
+    }
+
+    public void setPostedDate(String postedDate) {
+        this.postedDate = postedDate;
+    }
+
+    public String getPostedBy() {
+        return postedBy;
+    }
+
+    public void setPostedBy(String postedBy) {
+        this.postedBy = postedBy;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Message() {
+    }
+
+    public Message(@NotNull @Size(min = 3) String title, @NotNull @Size(min = 1, max = 250) String content, @NotNull @Size(min = 5) String postedDate, @NotNull @Size(min = 2) String postedBy, String image) {
+        this.title = title;
+        this.content = content;
+        this.postedDate = postedDate;
+        this.postedBy = postedBy;
+        this.image = image;
+    }
+}
