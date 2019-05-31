@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Message Details</title>
 
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -10,46 +10,41 @@
 </head>
 <body>
 
-
 <div th:replace="base :: navlinks"></div>
+
 
 <header style="text-align: center; padding-top: 60px;">
     <h1>Message App</h1>
     <h4>Post your thoughts</h4>
 </header>
 <section style="padding-left: 30px">
+    <a style="font-size: 1.5em" href="/">Show All Messages</a><br />
     <a style="font-size: 1.5em" href="/add">Add a Message</a>
 </section>
-<section >
-    <div class="container" th:each="message : ${messages}">
-        <!--For each message make a new row-->
+
+<section>
+    <div class="container">
         <div class="row">
-            <div style="text-align: center;" class="col-sm-4 info">
-                <h2 th:text="${message.title}"></h2>
-                <p th:inline="text"> Posted by: [[${message.postedBy}]]</p>
-                <p th:inline="text"> Posted On: [[${message.postedDate}]]</p>
+            <div style="text-align: center" class="col-sm-4">
+                <h4>Title: </h4><span th:text="${message.title}"></span><br />
+                <h4>Posted By: </h4><span th:text="${message.postedBy}"></span><br />
+                <h4>Posted Date: </h4><span th:text="${message.postedDate}"></span><br />
             </div>
-            <div class="col-sm-6 content">
-                <p style="font-size: 1.5em;" th:text="${message.content}"></p>
+
+            <div class="col-sm-6">
+                <h4>Content: </h4><span style="font-size: 1.5em;" th:text="${message.content}"></span><br />
                 <div style="text-align: center" th:if="${message.image} != null">
-                    <img th:src="${message.image}" />
+                    <img   th:src="${message.image}" />
                 </div>
             </div>
-            <div class="col-sm-2 actions">
-                <div sec:authorize="isAuthenticated()">
-                    <div th:if="${message.getUser().getId() == user.getId()}">
-                        <a style="font-size: 1.5em" th:href="@{/update/{id}(id=${message.id})}">Update</a><br />
-                        <a style="font-size: 1.5em" th:href="@{/delete/{id}(id=${message.id})}">Delete</a><br />
-                    </div>
-                </div>
 
-                <a style="font-size: 1.5em" th:href="@{/detail/{id}(id=${message.id})}">Details</a><br />
-
+            <div class="col-sm-2" th:if="${message.getUser().getId() == user.getId()}">
+                <a style="font-size: 1em" th:href="@{/delete/{id}(id=${message.id})}">Delete this Message</a>
             </div>
         </div>
     </div>
-</section>
 
+</section>
 
 <!--Bootstrap JS-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

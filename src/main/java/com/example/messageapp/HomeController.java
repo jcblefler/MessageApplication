@@ -82,6 +82,8 @@ public class HomeController {
 
     @PostMapping("/process")
     public String processForm(@Valid Message message, BindingResult result, @RequestParam("file")MultipartFile file) {
+
+
         if (result.hasErrors()) {
             return "messageform";
         }
@@ -97,6 +99,7 @@ public class HomeController {
             }
 
         }
+        message.setUser(userService.getCurrentUser());
         messageRepository.save(message);
         return "redirect:/";
     }
@@ -104,6 +107,7 @@ public class HomeController {
     @RequestMapping("/detail/{id}")
     public String showMessage(@PathVariable("id") long id, Model model){
         model.addAttribute("message", messageRepository.findById(id).get());
+        model.addAttribute("user", userService.getCurrentUser());
         return"show";
     }
 
@@ -119,4 +123,13 @@ public class HomeController {
         return"redirect:/";
     }
 
+
+    //user pages
+    @RequestMapping("/user")
+    public String userPage(Model model){
+        model.addAttribute("messages", messageRepository.findAll());
+        model.addAttribute("user", userService.getCurrentUser());
+
+        return "userpage";
+    }
 }
