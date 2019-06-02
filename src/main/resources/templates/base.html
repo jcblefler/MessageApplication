@@ -10,7 +10,8 @@
 </head>
 <body>
 
-<div th:fragment="navlinks" >
+<!--NavBar-->
+<div th:fragment="navlinks" id="navlinks">
 
     <div sec:authorize="isAnonymous()">
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -50,6 +51,54 @@
     </div>
 
 </div>
+
+
+<!--Header-->
+<div th:fragment="header">
+   <div>
+       <div class="headerBanner">
+           <div class="banner">
+               <h1>RIPPLE</h1>
+               <h4>Post your thoughts</h4>
+                <img src="https://res.cloudinary.com/jcblefler/image/upload/v1559437450/banner.jpg" width="100%" hieght="80px"/>
+           </div>
+       </div>
+       <div>
+           <div style="background-color: aqua; height: 30px; width: 100%;">
+
+           </div>
+       </div>
+   </div>
+
+</div>
+
+<!--<div th:fragment="info">-->
+<!--    <div id="info">-->
+
+<!--        <div sec:authorize="isAuthenticated()">-->
+<!--            <div class="name">-->
+<!--                <h4 th:inline="text">[[${user.firstName}]] [[${user.lastName}]]</h4>-->
+<!--                <h5 th:inline="text">@[[${user.username}]]</h5>-->
+<!--            </div>-->
+
+<!--            <div>-->
+<!--                <h3>Followed Users</h3>-->
+<!--                <ul>-->
+<!--                    <li></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div sec:authorize="isAnonymous()">-->
+<!--            <div>-->
+<!--                <h5>Current Users</h5>-->
+<!--                <ul th:each="user : ${users}">-->
+<!--                    <li th:text="${user.getUsername}"></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <!--Bootstrap JS-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

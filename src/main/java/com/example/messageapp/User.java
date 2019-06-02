@@ -38,6 +38,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Collection<Message> messages;
 
+    @OneToMany()
+    private Collection<User> followed;
+
     public User() {
     }
 
@@ -137,5 +140,13 @@ public class User {
 
     public void setMessages(Message message) {
         messages.add(message);
+    }
+
+    public Collection<User> getFollowed() {
+        return followed;
+    }
+
+    public void setFollowed(User user) {
+        followed.add(user);
     }
 }

@@ -7,48 +7,80 @@
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!--Style CSS-->
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
 </head>
 <body>
 
 
 <div th:replace="base :: navlinks"></div>
+<div th:replace="base :: header"></div>
 
-<header style="text-align: center; padding-top: 60px;">
-    <h1>Message App</h1>
-    <h4>Post your thoughts</h4>
-</header>
-<section style="padding-left: 30px">
-    <a style="font-size: 1.5em" href="/add">Add a Message</a>
-</section>
-<section >
-    <div class="container" th:each="message : ${messages}">
-        <!--For each message make a new row-->
-        <div class="row">
-            <div style="text-align: center;" class="col-sm-4 info">
-                <h2 th:text="${message.title}"></h2>
-                <p th:inline="text"> Posted by: [[${message.postedBy}]]</p>
-                <p th:inline="text"> Posted On: [[${message.postedDate}]]</p>
-            </div>
-            <div class="col-sm-6 content">
-                <p style="font-size: 1.5em;" th:text="${message.content}"></p>
-                <div style="text-align: center" th:if="${message.image} != null">
-                    <img th:src="${message.image}" />
-                </div>
-            </div>
-            <div class="col-sm-2 actions">
+<div class="container" style="padding-top: 2em">
+    <div class="row">
+        <div class="col-sm-4">
+            <div id="info">
                 <div sec:authorize="isAuthenticated()">
-                    <div th:if="${message.getUser().getId() == user.getId()}">
-                        <a style="font-size: 1.5em" th:href="@{/update/{id}(id=${message.id})}">Update</a><br />
-                        <a style="font-size: 1.5em" th:href="@{/delete/{id}(id=${message.id})}">Delete</a><br />
+                    <div class="name">
+                        <h4 th:inline="text">[[${user.firstName}]] [[${user.lastName}]]</h4>
+                        <h5 th:inline="text">@[[${user.username}]]</h5>
+                    </div>
+
+                    <div>
+                        <h3>Followed Users</h3>
+                        <ul>
+                            <li></li>
+                        </ul>
                     </div>
                 </div>
 
-                <a style="font-size: 1.5em" th:href="@{/detail/{id}(id=${message.id})}">Details</a><br />
+                <div sec:authorize="isAnonymous()">
+                    <div>
+                        <h5>Current Users</h5>
+                        <ul th:each="user : ${users}">
+                            <li th:text="${user.getUsername()}"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="container" th:each="message : ${messages}">
+                <!--For each message make a new row-->
+                <div class="row">
+                    <div style="text-align: center;" class="col-sm-4 info">
+                        <h2 th:text="${message.title}"></h2>
+                        <p th:inline="text"> Posted by: [[${message.postedBy}]]</p>
+                        <p th:inline="text"> Posted On: [[${message.postedDate}]]</p>
+                    </div>
+                    <div class="col-sm-6 content">
+                        <p style="font-size: 1.5em;" th:text="${message.content}"></p>
+                        <div style="text-align: center" th:if="${message.image} != null">
+                            <img th:src="${message.image}" />
+                        </div>
+                    </div>
+                    <div class="col-sm-2 actions">
+                        <div sec:authorize="isAuthenticated()">
+                            <div th:if="${message.getUser().getId() == user.getId()}">
+                                <a style="font-size: 1.5em" th:href="@{/update/{id}(id=${message.id})}">Update</a><br />
+                            </div>
+                        </div>
 
+                        <a style="font-size: 1.5em" th:href="@{/detail/{id}(id=${message.id})}">Details</a><br />
+
+                        <div sec:authorize="isAuthenticated()">
+                            <div th:if="${message.getUser().getId() == user.getId()}">
+                                <a style="font-size: 1.5em" th:href="@{/delete/{id}(id=${message.id})}">Delete</a><br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</section>
+</div>
+
 
 
 <!--Bootstrap JS-->

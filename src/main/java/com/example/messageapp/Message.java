@@ -20,11 +20,10 @@ public class Message {
     private String content;
 
     @NotNull
-    @Size(min = 5)
+    @Size(min = 2)
     private String postedDate;
 
-    @NotNull
-    @Size(min = 2)
+
     private String postedBy;
 
     private String image;
@@ -92,11 +91,10 @@ public class Message {
     public Message() {
     }
 
-    public Message(@NotNull @Size(min = 3) String title, @NotNull @Size(min = 1, max = 250) String content, @NotNull @Size(min = 5) String postedDate, @NotNull @Size(min = 2) String postedBy, String image) {
+    public Message(@NotNull @Size(min = 3) String title, @NotNull @Size(min = 1, max = 250) String content, @NotNull @Size(min = 5) String postedDate) {
         this.title = title;
         this.content = content;
         this.postedDate = postedDate;
-        this.postedBy = postedBy;
-        this.image = image;
+
     }
 }

@@ -17,6 +17,9 @@ public class DataLoader implements CommandLineRunner{
     RoleRepository roleRepository;
 
     @Autowired
+    MessageRepository messageRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     /*
@@ -41,5 +44,14 @@ public class DataLoader implements CommandLineRunner{
         user = new User("admin@adm.com",passwordEncoder.encode("password"),"Admin","User",true,"admin");
         user.setRoles(Arrays.asList(adminRole));
         userRepository.save(user);
+
+//        Message message = new Message("Dogs", "This post is about dogs. I like dogs and they are fluffy.", "5/31/2019");
+//        messageRepository.save(message);
+//
+//        message = new Message("Cats", "This post is about cats. I like cats and they are grumpy.", "5/1/2019");
+//        messageRepository.save(message);
+//
+//        message = new Message("Fish", "This post is about fish. I like fish and they like to swim.", "4/3/2019");
+//        messageRepository.save(message);
     }
 }

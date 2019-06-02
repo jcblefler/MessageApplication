@@ -21,6 +21,9 @@ public class HomeController {
     private MessageRepository messageRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     CloudinaryConfig cloudc;
 
 
@@ -30,9 +33,18 @@ public class HomeController {
 
         model.addAttribute("messages", messageRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("users", userRepository.findAll());
         return "index";
     }
 
+    @RequestMapping("/basehtml")
+    public String base(Model model){
+
+        model.addAttribute("messages", messageRepository.findAll());
+        model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("users", userRepository.findAll());
+        return "base";
+    }
 
     //Security
 
@@ -44,7 +56,8 @@ public class HomeController {
     @GetMapping("/register")
     public String showRegistrationPage(Model model) {
         model.addAttribute("user", new User());
-        return "/registration";
+        model.addAttribute("users", userRepository.findAll());
+        return "registration";
     }
 
     @PostMapping("/register")
@@ -66,7 +79,7 @@ public class HomeController {
         // Gets the currently logged in user and maps it to "user" in the Thymeleaf template
         model.addAttribute("user", userService.getCurrentUser());
 
-        return "secure";
+        return "redirect:/";
     }
 
 
@@ -77,6 +90,7 @@ public class HomeController {
         model.addAttribute("message", new Message());
         model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("userFullName", userService.getUserFullName());
+        model.addAttribute("users", userRepository.findAll());
         return "messageform";
     }
 
@@ -99,6 +113,7 @@ public class HomeController {
             }
 
         }
+        message.setPostedBy(userService.getCurrentUser().getUsername());
         message.setUser(userService.getCurrentUser());
         messageRepository.save(message);
         return "redirect:/";
@@ -108,12 +123,18 @@ public class HomeController {
     public String showMessage(@PathVariable("id") long id, Model model){
         model.addAttribute("message", messageRepository.findById(id).get());
         model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("users", userRepository.findAll());
+
         return"show";
     }
 
     @RequestMapping("/update/{id}")
     public String updateMessage(@PathVariable("id") long id, Model model){
         model.addAttribute("message", messageRepository.findById(id).get());
+        model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("userFullName", userService.getUserFullName());
+        model.addAttribute("users", userRepository.findAll());
+
         return"messageform";
     }
 
@@ -129,6 +150,8 @@ public class HomeController {
     public String userPage(Model model){
         model.addAttribute("messages", messageRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("users", userRepository.findAll());
+
 
         return "userpage";
     }

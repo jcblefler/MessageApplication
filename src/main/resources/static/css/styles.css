@@ -1,0 +1,49 @@
+body {
+    background-color: orange;
+}
+
+#navlinks {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    width: 100%;
+}
+
+/*Base Header*/
+.headerBanner{
+    text-align: center;
+}
+.banner {
+    position: relative;
+}
+.banner h1 {
+    position: absolute;
+    width: 100%;
+    color: #012051;
+    line-height: 200px;
+    margin: 0;
+    padding-top: 5%;
+    font-family: 'Fugaz One', cursive;
+    font-size: 5em;
+}
+.banner h4 {
+    position: absolute;
+    width: 100%;
+    color: #012051;
+    line-height: 200px;
+    margin: 0;
+    padding-top: 10%;
+    font-family: 'Fugaz One', cursive;
+    font-size: 2em;
+}
+
+
+
+#info {
+    background-color: blueviolet;
+    text-align: center;
+}
+
+#info li {
+    list-style: none;
+}
