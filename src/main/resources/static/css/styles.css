@@ -78,6 +78,9 @@ body {
 .postfollow {
     float: right;
 }
+.postfollow a:link {
+    color: aliceblue;
+}
 .postactions {
     float: right;
 }
