@@ -74,8 +74,9 @@
                         <div class="postcontent">
                             <p th:text="${message.getTitle()}" style="text-align: center; padding-bottom: 0;"></p>
                             <p th:text="${message.getContent()}"></p>
-
-                            <a th:href="@{/detail/{id}(id=${message.id})}">DETAILS</a>
+                            <p style="text-align: center">
+                                <a th:href="@{/detail/{id}(id=${message.id})}">DETAILS</a>
+                            </p>
                             <hr />
                         </div>
                     </li>
