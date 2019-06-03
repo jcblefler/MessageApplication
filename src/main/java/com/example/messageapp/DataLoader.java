@@ -37,13 +37,13 @@ public class DataLoader implements CommandLineRunner{
         Role userRole = roleRepository.findByRole("USER");
         Role adminRole = roleRepository.findByRole("ADMIN");
 
-        User user = new User("bob@bob.com",passwordEncoder.encode("password"),"Bob","Bobberson",true,"bob");
-        user.setRoles(Arrays.asList(userRole));
-        userRepository.save(user);
-
-        user = new User("admin@adm.com",passwordEncoder.encode("password"),"Admin","User",true,"admin");
-        user.setRoles(Arrays.asList(adminRole));
-        userRepository.save(user);
+//        User user = new User("bob@bob.com",passwordEncoder.encode("password"),"Bob","Bobberson",true,"bob");
+//        user.setRoles(Arrays.asList(userRole));
+//        userRepository.save(user);
+//
+//        user = new User("admin@adm.com",passwordEncoder.encode("password"),"Admin","User",true,"admin");
+//        user.setRoles(Arrays.asList(adminRole));
+//        userRepository.save(user);
 
 //        Message message = new Message("Dogs", "This post is about dogs. I like dogs and they are fluffy.", "5/31/2019");
 //        messageRepository.save(message);

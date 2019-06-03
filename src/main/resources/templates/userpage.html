@@ -58,8 +58,11 @@
 
 
         <div class="col-sm-8">
+            <div style="text-align: center;">
+                <img th:src="${user.getProfilePic()}" alt="Profile Icon" style="border-radius: 50%;"/>
+            </div>
             <div th:if="${messages != null}">
-                <ul th:each="message : ${messages}">
+                <ul th:each="message : ${user.getMessages()}">
                     <li>
                         <span class="postinfo">
                             <!--<img src="" alt="icon"/>-->

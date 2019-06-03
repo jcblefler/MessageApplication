@@ -64,12 +64,12 @@
            </div>
        </div>
        <div class="headerstrip">
-           <div style="background-color: aqua; height: 30px; width: 100%;">
-                <div sec:authorize="isAnonymous()">
+           <div style="background-color: #00334e; height: 4px; width: 100%;">
+                <div style="padding-top: 5px" sec:authorize="isAnonymous()">
                     <img src="https://res.cloudinary.com/jcblefler/image/upload/v1559572692/ripple.jpg" alt="Profile Icon"/>
                 </div>
 
-               <div sec:authorize="isAuthenticated()">
+               <div style="padding-top: 5px" sec:authorize="isAuthenticated()">
                    <img th:src="${user.getProfilePic()}" alt="Profile Icon"/>
                </div>
 

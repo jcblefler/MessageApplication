@@ -3,6 +3,7 @@ package com.example.messageapp;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Set;
 
@@ -15,21 +16,26 @@ public class User {
     private long id;
 
     @Column(name = "email", nullable = false)
+    @NotNull
     private String email;
 
     @Column(name = "password")
+    @NotNull
     private String password;
 
     @Column(name = "first_name")
+    @NotNull
     private String firstName;
 
     @Column(name = "last_name")
+    @NotNull
     private String lastName;
 
     @Column(name = "enabled")
     private boolean enabled;
 
     @Column(name = "username")
+    @NotNull
     private String username;
 
     @Column(name = "profile_pic")
@@ -57,13 +63,14 @@ public class User {
 //    }
 
 
-    public User(String email, String password, String firstName, String lastName, boolean enabled, String username) {
+    public User(@NotNull String email, @NotNull String password, @NotNull String firstName, @NotNull String lastName, boolean enabled, @NotNull String username, String profilePic) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.enabled = enabled;
         this.username = username;
+        this.profilePic = profilePic;
     }
 
     public long getId() {

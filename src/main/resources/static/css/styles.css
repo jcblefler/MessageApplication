@@ -1,5 +1,5 @@
 body {
-    background-color: orange;
+    background-color: #5e86a0;
 }
 
 #navlinks {
@@ -10,7 +10,11 @@ body {
 }
 
 #navlinks nav {
-    background-color: #012051;
+    background-color: #066a8c;
+}
+
+#navlinks a:link {
+    color: aliceblue;
 }
 
 /*Base Header*/
@@ -50,7 +54,6 @@ body {
 
 
 #info {
-    background-color: blueviolet;
     text-align: center;
 }
 
@@ -80,8 +83,15 @@ body {
 }
 .postactions a:link {
     font-size: .5em;
+    color: aliceblue;
+
 }
 
 .postcontent p {
     font-size: 2em;
+}
+
+
+.container {
+    margin-top: 1em;
 }
