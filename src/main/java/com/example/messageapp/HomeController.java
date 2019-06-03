@@ -61,16 +61,28 @@ public class HomeController {
     }
 
     @PostMapping("/register")
-    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, @RequestParam("role") String role, BindingResult result, Model model) {
+    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, @RequestParam("role") String role, @RequestParam("file")MultipartFile file, BindingResult result, Model model) {
         model.addAttribute("user", user);
 
         if(result.hasErrors()) {
             return "registration";
         }
-        else {
-            userService.saveUser(user, role);
-            model.addAttribute("message", "User Account Successfully Created");
+        if (file.isEmpty()) {
+            user.setProfilePic("https://res.cloudinary.com/jcblefler/image/upload/v1559572692/ripple.jpg");
+        }else {
+            try {
+                Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+                user.setProfilePic(uploadResult.get("url").toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "redirect:/add";
+            }
+
         }
+
+        userService.saveUser(user, role);
+        model.addAttribute("message", "User Account Successfully Created");
+
         return "redirect:/";
     }
 
@@ -95,24 +107,24 @@ public class HomeController {
     }
 
     @PostMapping("/process")
-    public String processForm(@Valid Message message, BindingResult result, @RequestParam("file")MultipartFile file) {
+    public String processForm(@Valid Message message, BindingResult result/*, @RequestParam("file")MultipartFile file*/) {
 
 
         if (result.hasErrors()) {
             return "messageform";
         }
-        if (file.isEmpty()) {
-            message.setImage(" ");
-        } else {
-            try {
-                Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
-                message.setImage(uploadResult.get("url").toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "redirect:/add";
-            }
-
-        }
+//        if (file.isEmpty()) {
+//            message.setImage(" ");
+//        } else {
+//            try {
+//                Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+//                message.setImage(uploadResult.get("url").toString());
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                return "redirect:/add";
+//            }
+//
+//        }
         message.setPostedBy(userService.getCurrentUser().getUsername());
         message.setUser(userService.getCurrentUser());
         messageRepository.save(message);

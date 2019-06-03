@@ -36,7 +36,7 @@
         <div class="col-sm-6">
             <h2>New User Registration</h2>
 
-            <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post">
+            <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post" enctype="multipart/form-data">
                 First Name
                 <mark>
                     <strong>
@@ -72,6 +72,9 @@
                     </strong>
                 </mark>
                 <input type="text" id="password" placeholder="Password" th:field="*{password}"/><br/>
+
+                Profile Picture
+                <input type="file" name="file"><br />
 
                 <input type="hidden" name="role" value="USER"><br>
                 <!--input type="radio" name="role" value="ADMIN">I am a Admin<br>-->

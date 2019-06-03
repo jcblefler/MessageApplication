@@ -63,8 +63,15 @@
                 <img src="https://res.cloudinary.com/jcblefler/image/upload/v1559437450/banner.jpg" width="100%" hieght="80px"/>
            </div>
        </div>
-       <div>
+       <div class="headerstrip">
            <div style="background-color: aqua; height: 30px; width: 100%;">
+                <div sec:authorize="isAnonymous()">
+                    <img src="https://res.cloudinary.com/jcblefler/image/upload/v1559572692/ripple.jpg" alt="Profile Icon"/>
+                </div>
+
+               <div sec:authorize="isAuthenticated()">
+                   <img th:src="${user.getProfilePic()}" alt="Profile Icon"/>
+               </div>
 
            </div>
        </div>

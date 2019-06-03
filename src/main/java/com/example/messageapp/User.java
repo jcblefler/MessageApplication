@@ -32,6 +32,9 @@ public class User {
     @Column(name = "username")
     private String username;
 
+    @Column(name = "profile_pic")
+    private String profilePic;
+
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles;
 
@@ -124,6 +127,14 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 
     public Collection<Role> getRoles() {
