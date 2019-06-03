@@ -9,6 +9,10 @@ body {
     width: 100%;
 }
 
+#navlinks nav {
+    background-color: #012051;
+}
+
 /*Base Header*/
 .headerBanner{
     text-align: center;
