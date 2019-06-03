@@ -51,3 +51,28 @@ body {
 #info li {
     list-style: none;
 }
+
+
+/*Index Page*/
+
+.postlist ul{
+    list-style-type: none;
+}
+
+.postinfo p {
+    display: inline;
+    font-size: 1.5em;
+}
+.postfollow p {
+    display: inline;
+}
+.postactions {
+    float: right;
+}
+.postactions a:link {
+    font-size: .5em;
+}
+
+.postcontent p {
+    font-size: 2em;
+}

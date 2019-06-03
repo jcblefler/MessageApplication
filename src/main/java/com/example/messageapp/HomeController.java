@@ -155,4 +155,18 @@ public class HomeController {
 
         return "userpage";
     }
+
+    @RequestMapping("/follow/{id}")
+    public String followUser(@PathVariable("id") long id, Model model){
+//        model.addAttribute("message", messageRepository.findById(id).get());
+//        model.addAttribute("user", userService.getCurrentUser());
+//        model.addAttribute("userFullName", userService.getUserFullName());
+//        model.addAttribute("users", userRepository.findAll());
+
+        userService.getCurrentUser().setFollowed(userRepository.findById(id));
+        userRepository.save(userService.getCurrentUser());
+
+
+        return"redirect:/";
+    }
 }

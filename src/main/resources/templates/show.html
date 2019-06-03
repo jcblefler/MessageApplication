@@ -29,8 +29,17 @@
 
                     <div>
                         <h3>Followed Users</h3>
-                        <ul>
-                            <li></li>
+                        <ul th:each="followed : ${user.getFollowed()}">
+                            <li th:text="${followed.username}"></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3>Followed By</h3>
+                        <ul th:each="person : ${users}">
+                            <div th:if="${person.getFollowed().contains(user) && person.getId() != user.getId()}">
+                                <li th:text="${person.username}"></li>
+                            </div>
                         </ul>
                     </div>
                 </div>

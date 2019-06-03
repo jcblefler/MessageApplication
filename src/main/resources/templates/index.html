@@ -29,8 +29,17 @@
 
                     <div>
                         <h3>Followed Users</h3>
-                        <ul>
-                            <li></li>
+                        <ul th:each="followed : ${user.getFollowed()}">
+                            <li th:text="${followed.username}"></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3>Followed By</h3>
+                        <ul th:each="person : ${users}">
+                            <div th:if="${person.getFollowed().contains(user) && person.getId() != user.getId()}">
+                                <li th:text="${person.username}"></li>
+                            </div>
                         </ul>
                     </div>
                 </div>
@@ -45,39 +54,37 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="container" th:each="message : ${messages}">
-                <!--For each message make a new row-->
-                <div class="row">
-                    <div style="text-align: center;" class="col-sm-4 info">
-                        <h2 th:text="${message.title}"></h2>
-                        <p th:inline="text"> Posted by: [[${message.postedBy}]]</p>
-                        <p th:inline="text"> Posted On: [[${message.postedDate}]]</p>
-                    </div>
-                    <div class="col-sm-6 content">
-                        <p style="font-size: 1.5em;" th:text="${message.content}"></p>
-                        <div style="text-align: center" th:if="${message.image} != null">
-                            <img th:src="${message.image}" />
-                        </div>
-                    </div>
-                    <div class="col-sm-2 actions">
-                        <div sec:authorize="isAuthenticated()">
-                            <div th:if="${message.getUser().getId() == user.getId()}">
-                                <a style="font-size: 1.5em" th:href="@{/update/{id}(id=${message.id})}">Update</a><br />
-                            </div>
-                        </div>
 
-                        <a style="font-size: 1.5em" th:href="@{/detail/{id}(id=${message.id})}">Details</a><br />
 
-                        <div sec:authorize="isAuthenticated()">
-                            <div th:if="${message.getUser().getId() == user.getId()}">
-                                <a style="font-size: 1.5em" th:href="@{/delete/{id}(id=${message.id})}">Delete</a><br />
+        <div class="col-sm-8 postlist">
+            <div th:if="${messages != null}">
+                <ul th:each="message : ${messages}">
+                    <li>
+                        <span class="postinfo">
+                            <!--<img src="" alt="icon"/>-->
+                            <p><strong th:text="${message.getUser().firstName}"></strong></p>
+                            <p th:inline="text"><strong>@</strong>[[${message.getUser().username}]]</p>
+                            <p th:inline="text"> &#8226; [[${message.getPostedDate()}]]</p>
+                        </span>
+                        <span class="postfollow">
+                            <div th:if="${message.getUser().getId() != user.getId() && !user.getFollowed().contains(message.getUser())}">
+                            <a style="font-size: 1.5em" th:href="@{/follow/{id}(id=${message.getUser().getId()})}">FOLLOW</a><br />
                             </div>
+                        </span>
+                        <div class="postcontent">
+                            <p th:text="${message.getTitle()}" style="text-align: center; padding-bottom: 0;"></p>
+                            <p th:text="${message.getContent()}"></p>
+                            <hr />
+                            <!--<img th:src="${message.getImage()}" alt="post Image" height="350px" width="350px"/>-->
                         </div>
-                    </div>
-                </div>
+                    </li>
+                </ul>
             </div>
+
         </div>
+
+
+
     </div>
 </div>
 
