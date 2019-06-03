@@ -74,10 +74,8 @@
                         <div class="postcontent">
                             <p th:text="${message.getTitle()}" style="text-align: center; padding-bottom: 0;"></p>
                             <p th:text="${message.getContent()}"></p>
-                            <!--<hr style="width: 25%;"/>-->
-                            <!--<p style="text-align: center;" th:if="${message.getImage()}">-->
-                                <!--<img th:src="${message.getImage()}" alt="post Image" height="350px" width="350px"/>-->
-                            <!--</p>-->
+
+                            <a th:href="@{/detail/{id}(id=${message.id})}">DETAILS</a>
                             <hr />
                         </div>
                     </li>

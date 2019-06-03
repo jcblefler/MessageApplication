@@ -73,7 +73,7 @@
                 <h4>Content: </h4><textarea rows="5" cols="50" th:field="*{content}" ></textarea>
                 <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span> <br />
 
-                <!--<input type="file" name="file"><br />-->
+                <input type="file" name="file"><br />
 
 
                 <input type="submit" value="Submit" />

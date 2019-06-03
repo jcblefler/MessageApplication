@@ -72,6 +72,14 @@
                 <div class="col-sm-2" th:if="${message.getUser().getId() == user.getId()}">
                     <a style="font-size: 1em; text-align: center" th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
                 </div>
+
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <p style="text-align: center;" th:if="${message.getImage()}">
+                    <img th:src="${message.getImage()}" alt="post Image" height="350px" width="350px"/>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

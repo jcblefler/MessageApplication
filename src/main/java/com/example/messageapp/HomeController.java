@@ -107,24 +107,24 @@ public class HomeController {
     }
 
     @PostMapping("/process")
-    public String processForm(@Valid Message message, BindingResult result/*, @RequestParam("file")MultipartFile file*/) {
+    public String processForm(@Valid Message message, BindingResult result, @RequestParam("file")MultipartFile file) {
 
 
         if (result.hasErrors()) {
             return "messageform";
         }
-//        if (file.isEmpty()) {
-//            message.setImage(" ");
-//        } else {
-//            try {
-//                Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
-//                message.setImage(uploadResult.get("url").toString());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                return "redirect:/add";
-//            }
-//
-//        }
+        if (file.isEmpty()) {
+            message.setImage(" ");
+        } else {
+            try {
+                Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+                message.setImage(uploadResult.get("url").toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "redirect:/add";
+            }
+
+        }
         message.setPostedBy(userService.getCurrentUser().getUsername());
         message.setUser(userService.getCurrentUser());
         messageRepository.save(message);

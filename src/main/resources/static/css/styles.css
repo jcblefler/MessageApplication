@@ -93,6 +93,9 @@ body {
 .postcontent p {
     font-size: 2em;
 }
+.postcontent a:link {
+    color: aliceblue;
+}
 
 
 .container {
